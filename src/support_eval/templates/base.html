@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d16">
+  <meta name="description" content="Evaluate support conversations against your QA rubric.">
+  <title>{% block title %}Support Eval{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+  <script defer src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body data-page="{% block page %}base{% endblock %}">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="{{ url_for('index') }}" aria-label="Support Eval home">
+      <span class="brand-mark" aria-hidden="true">SE</span>
+      <span class="brand-name">Support Eval</span>
+      <span class="beta-badge">Beta</span>
+    </a>
+    {% block header_action %}
+      <a class="button button-secondary button-small" href="{{ url_for('index') }}">New evaluation</a>
+    {% endblock %}
+  </header>
+  <main id="main-content" class="page-shell">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-stack" role="alert">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="site-footer">
+    <span>Local-first support QA</span>
+    <span>AI judgments are beta and require human review.</span>
+  </footer>
+</body>
+</html>

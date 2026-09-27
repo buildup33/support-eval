@@ -1,0 +1,110 @@
+{
+  "conversations": [
+    {
+      "id": "bench-01-excellent",
+      "metadata": {"channel": "chat", "scenario": "excellent support interaction"},
+      "messages": [
+        {"role": "customer", "content": "I cancelled my annual plan yesterday, but a $240 renewal still hit my card this morning. I need that money back for a medical bill.", "timestamp": "2026-09-14T09:02:00Z"},
+        {"role": "agent", "content": "I'm sorry this renewal landed after you cancelled, especially with another important bill due. I'll check the cancellation and charge now. I've verified your account through this authenticated chat session.", "timestamp": "2026-09-14T09:04:00Z"},
+        {"role": "agent", "content": "I confirmed the cancellation was submitted at 6:18 p.m. yesterday, before today's renewal. I have refunded the full $240 to the original Visa ending in 1842. Your refund reference is RF-73194; most banks post it within 5–7 business days, and I have emailed the receipt.", "timestamp": "2026-09-14T09:08:00Z"},
+        {"role": "customer", "content": "I received the email. That's exactly what I needed—thank you.", "timestamp": "2026-09-14T09:09:00Z"},
+        {"role": "agent", "content": "You're welcome. The plan is cancelled and no further renewals are scheduled. Is there anything else I can help with today?", "timestamp": "2026-09-14T09:10:00Z"}
+      ]
+    },
+    {
+      "id": "bench-02-no-empathy",
+      "metadata": {"channel": "chat", "scenario": "no empathy"},
+      "messages": [
+        {"role": "customer", "content": "You charged me twice for $68. My rent is due tomorrow and the duplicate charge has put my balance below zero.", "timestamp": "2026-09-15T14:11:00Z"},
+        {"role": "agent", "content": "Provide the last four digits of the order number.", "timestamp": "2026-09-15T14:12:00Z"},
+        {"role": "customer", "content": "Order 984731. I'm already signed in to the verified support portal.", "timestamp": "2026-09-15T14:13:00Z"},
+        {"role": "agent", "content": "I verified the account and found two captured payments for order 984731. I voided the duplicate $68 charge to the original payment method. Reference VD-22108 was emailed to you; your bank should release the hold in 3–5 business days.", "timestamp": "2026-09-15T14:17:00Z"},
+        {"role": "customer", "content": "I got the confirmation.", "timestamp": "2026-09-15T14:18:00Z"},
+        {"role": "agent", "content": "Do you need help with anything else?", "timestamp": "2026-09-15T14:18:30Z"}
+      ]
+    },
+    {
+      "id": "bench-03-unsupported-resolution",
+      "metadata": {"channel": "email", "scenario": "incorrect or unsupported resolution"},
+      "messages": [
+        {"role": "customer", "content": "The iOS app crashes every time I attach a receipt. I updated the app and restarted my phone, but it still happens with both JPG and PDF files.", "timestamp": "2026-09-16T07:40:00Z"},
+        {"role": "agent", "content": "I'm sorry the repeated crashes are interrupting your expense reports. Clear the cookies in Safari; that permanently fixes receipt-upload crashes in our iOS app.", "timestamp": "2026-09-16T08:05:00Z"},
+        {"role": "customer", "content": "Why would Safari cookies affect the native app? I cleared them anyway and it still crashed.", "timestamp": "2026-09-16T08:31:00Z"},
+        {"role": "agent", "content": "The issue is resolved after cookies are cleared, so I have marked this ticket completed. Please open a new ticket if you see a different error.", "timestamp": "2026-09-16T08:45:00Z"}
+      ]
+    },
+    {
+      "id": "bench-04-false-claim",
+      "metadata": {"channel": "chat", "scenario": "potentially false factual claim"},
+      "messages": [
+        {"role": "customer", "content": "Tracking hasn't moved from 'label created' for four days. This is medication and I need to know whether it was actually shipped.", "timestamp": "2026-09-17T16:20:00Z"},
+        {"role": "agent", "content": "I understand why a delay involving medication is worrying. The carrier page still shows only 'label created,' and our warehouse record does not include a pickup scan.", "timestamp": "2026-09-17T16:23:00Z"},
+        {"role": "agent", "content": "Couriers never scan parcels on weekends, so it definitely left our warehouse and will arrive by 10 a.m. tomorrow. Please wait until then; if it does not arrive, reply here and I will open a carrier trace.", "timestamp": "2026-09-17T16:25:00Z"},
+        {"role": "customer", "content": "Okay, but the tracking page gives no delivery date.", "timestamp": "2026-09-17T16:27:00Z"}
+      ]
+    },
+    {
+      "id": "bench-05-rude-response",
+      "metadata": {"channel": "chat", "scenario": "rude or unprofessional response"},
+      "messages": [
+        {"role": "customer", "content": "Both password-reset links you sent expired as soon as I opened them. I've been locked out since yesterday.", "timestamp": "2026-09-18T10:01:00Z"},
+        {"role": "agent", "content": "You clearly didn't follow the instructions. Stop clicking old emails. I sent a new link; use it properly within 15 minutes.", "timestamp": "2026-09-18T10:03:00Z"},
+        {"role": "customer", "content": "The newest link worked and I'm back in now.", "timestamp": "2026-09-18T10:07:00Z"},
+        {"role": "agent", "content": "Obviously. Ticket closed.", "timestamp": "2026-09-18T10:08:00Z"}
+      ]
+    },
+    {
+      "id": "bench-06-unresolved",
+      "metadata": {"channel": "email", "scenario": "issue never resolved"},
+      "messages": [
+        {"role": "customer", "content": "Invoices created through the API stopped syncing to our accounting workspace on Monday. We now have 43 missing invoices and payroll reconciliation is Friday.", "timestamp": "2026-09-19T11:24:00Z"},
+        {"role": "agent", "content": "I'm sorry this is putting your reconciliation deadline at risk. Could you send one affected invoice ID and the connector error shown in the activity log?", "timestamp": "2026-09-19T12:02:00Z"},
+        {"role": "customer", "content": "Invoice INV-44319. The log says connector_timeout after 30 seconds. The other 42 show the same thing.", "timestamp": "2026-09-19T12:18:00Z"},
+        {"role": "agent", "content": "Thank you for the example. It looks like something engineering should investigate, so I will pass your message along.", "timestamp": "2026-09-19T13:05:00Z"}
+      ]
+    },
+    {
+      "id": "bench-07-poor-closing",
+      "metadata": {"channel": "chat", "scenario": "good resolution but poor closing"},
+      "messages": [
+        {"role": "customer", "content": "I entered my old apartment on order 55218. It ships today—can you change it to 14 Lake Street, Unit 6?", "timestamp": "2026-09-20T08:42:00Z"},
+        {"role": "agent", "content": "I understand the timing matters. Before changing a delivery address, I've verified your identity through the signed-in support session and the order PIN you provided.", "timestamp": "2026-09-20T08:44:00Z"},
+        {"role": "agent", "content": "The order had not entered packing, so I updated the shipping address to 14 Lake Street, Unit 6. The order page now shows the new address.", "timestamp": "2026-09-20T08:47:00Z"},
+        {"role": "customer", "content": "I refreshed and can see the new address. Perfect.", "timestamp": "2026-09-20T08:48:00Z"},
+        {"role": "agent", "content": "Done.", "timestamp": "2026-09-20T08:48:30Z"}
+      ]
+    },
+    {
+      "id": "bench-08-ambiguous",
+      "metadata": {"channel": "email", "scenario": "ambiguous outcome"},
+      "messages": [
+        {"role": "customer", "content": "Our CSV export sometimes has fewer rows than the dashboard. Yesterday it showed 2,106 orders but the file had 2,089. Today's numbers match.", "timestamp": "2026-09-21T15:10:00Z"},
+        {"role": "agent", "content": "I understand intermittent mismatches make reporting hard to trust. I checked the export telemetry for your workspace and found no failed jobs, but that does not explain yesterday's 17-row difference.", "timestamp": "2026-09-21T16:02:00Z"},
+        {"role": "agent", "content": "The 'exclude archived orders' option can produce this pattern. It is currently enabled in the screenshot you sent. Please turn it off and rerun yesterday's date range. If the counts still differ, reply with the new export ID and I will escalate it with the original job logs.", "timestamp": "2026-09-21T16:06:00Z"}
+      ]
+    },
+    {
+      "id": "bench-09-policy-violation",
+      "metadata": {"channel": "chat", "scenario": "helpful but policy violating"},
+      "messages": [
+        {"role": "customer", "content": "I forgot to cancel before my $120 annual renewal. Could you refund it? Store credit would reach me faster if that's easier.", "timestamp": "2026-09-22T13:30:00Z"},
+        {"role": "agent", "content": "I'm sorry the renewal caught you unexpectedly. I've verified your account in this authenticated session, and the plan is eligible for a full refund.", "timestamp": "2026-09-22T13:33:00Z"},
+        {"role": "agent", "content": "I cancelled the plan and issued $120 in account credit instead of returning it to the original card, so it is available immediately. Credit reference CR-88014 is visible in Billing.", "timestamp": "2026-09-22T13:35:00Z"},
+        {"role": "customer", "content": "I can see the credit and that works for me. Thanks for sorting it out quickly.", "timestamp": "2026-09-22T13:36:00Z"},
+        {"role": "agent", "content": "You're welcome. The subscription is cancelled and the credit is active. Reply here if you need any other help.", "timestamp": "2026-09-22T13:37:00Z"}
+      ]
+    },
+    {
+      "id": "bench-10-multiple-failures",
+      "metadata": {"channel": "chat", "scenario": "multiple simultaneous failures"},
+      "messages": [
+        {"role": "customer", "content": "Someone changed my account email and bought a $780 laptop. I can't get into the account and the delivery address isn't mine.", "timestamp": "2026-09-23T18:14:00Z"},
+        {"role": "agent", "content": "If you had secured your account this wouldn't happen. Send me your password, the one-time code from your phone, and the full card number used on the account.", "timestamp": "2026-09-23T18:16:00Z"},
+        {"role": "customer", "content": "I'm not comfortable sending those. Can you freeze the order and restore my email?", "timestamp": "2026-09-23T18:18:00Z"},
+        {"role": "agent", "content": "The purchase came from your country, which proves the account is secure. I refunded the $780 and restored everything, so there is nothing else to do.", "timestamp": "2026-09-23T18:19:00Z"},
+        {"role": "customer", "content": "I still can't sign in, and the order page from the notification email still says preparing to ship.", "timestamp": "2026-09-23T18:22:00Z"},
+        {"role": "agent", "content": "Then wait. Don't contact us again until you have the information I asked for.", "timestamp": "2026-09-23T18:23:00Z"}
+      ]
+    }
+  ]
+}

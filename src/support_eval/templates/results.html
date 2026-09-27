@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Results · Support Eval{% endblock %}
+{% block page %}results{% endblock %}
+{% block content %}
+<section class="results-heading results-hero">
+  <div><p class="eyebrow">Evaluation complete</p><h1>{{ report.rubric_name }}</h1><p>{{ job.display_filename }} · {{ report.summary.conversation_count }} conversations reviewed</p></div>
+  <div class="result-actions">
+    <a class="button button-secondary" href="{{ url_for('download_artifact', job_id=job.id, artifact='results.json') }}">Download JSON</a>
+    <a class="button button-secondary" href="{{ url_for('download_artifact', job_id=job.id, artifact='report.html') }}">Download HTML</a>
+  </div>
+</section>
+
+<section class="evaluation-summary" aria-label="Evaluation summary">
+  <article class="summary-primary"><span>Average score</span><strong>{{ '%.1f'|format(report.summary.average_score) }}</strong><small>out of 100</small></article>
+  <article><span>Passed</span><strong>{{ report.summary.conversation_count - report.summary.flagged_count }} <small>of {{ report.summary.conversation_count }}</small></strong><small>not flagged</small></article>
+  <article class="summary-alert"><span>Flagged</span><strong>{{ report.summary.flagged_count }} <small>of {{ report.summary.conversation_count }}</small></strong><small>need review</small></article>
+  <article><span>Rubric</span><strong>{{ rubric.criteria|length }}</strong><small>criteria evaluated</small></article>
+</section>
+
+<section class="panel results-section">
+  <div class="section-heading simple"><div><h2>Criteria performance</h2><p>Pass rates across all evaluated conversations.</p></div></div>
+  <div class="criterion-summary-grid">
+    {% for item in criterion_summary %}
+    <article class="summary-criterion">
+      <div><strong>{{ item.name }}</strong><span>{{ item.pass }} of {{ item.pass + item.fail + item.uncertain }} passed</span></div>
+      <div class="mini-track"><span style="width: {{ item.pass_rate }}%"></span></div>
+      <p><span class="status-dot status-pass"></span>{{ item.pass }} pass <span class="status-dot status-fail"></span>{{ item.fail }} fail <span class="status-dot status-uncertain"></span>{{ item.uncertain }} uncertain <span class="rate-note">{{ item.pass_rate }}%</span></p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="panel results-section">
+  <div class="list-header">
+    <div><h2>Conversations</h2><p>Open any row to inspect judgments and transcript evidence.</p></div>
+    <div class="filter-row" data-result-filters>
+      <div class="segmented" role="group" aria-label="Filter conversations">
+        <button type="button" class="active" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-filter="flagged" aria-pressed="false">Flagged</button>
+        <button type="button" data-filter="passed" aria-pressed="false">Passed</button>
+      </div>
+      <label class="visually-hidden" for="criterion-filter">Filter by criterion</label>
+      <select id="criterion-filter" class="select-control" data-criterion-filter>
+        <option value="">Any criterion</option>
+        {% for criterion in rubric.criteria %}<option value="{{ criterion.id }}">{{ criterion.name }} issues</option>{% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="conversation-list">
+    {% for conversation in report.conversations %}
+      {% set failed = conversation.evaluations|selectattr('status', 'equalto', 'fail')|list %}
+      {% set uncertain = conversation.evaluations|selectattr('status', 'equalto', 'uncertain')|list %}
+      <a class="conversation-row" href="{{ url_for('conversation_detail', job_id=job.id, conversation_id=conversation.conversation_id) }}" data-result-row data-state="{{ 'flagged' if conversation.flagged else 'passed' }}" data-criteria="{% for item in conversation.evaluations if item.status != 'pass' %}{{ item.criterion_id }} {% endfor %}">
+        <span class="score-ring {{ 'score-low' if conversation.flagged else 'score-good' }}">{{ '%.0f'|format(conversation.score) }}</span>
+        <span class="conversation-main"><strong>{{ conversation.conversation_id }}</strong><small>{{ failed|length }} failed · {{ uncertain|length }} uncertain</small></span>
+        <span class="status-pill {{ 'pill-flagged' if conversation.flagged else 'pill-passed' }}">{{ 'Flagged' if conversation.flagged else 'Passed' }}</span>
+        <span class="row-arrow" aria-hidden="true">→</span>
+      </a>
+    {% endfor %}
+    <p class="empty-filter" data-filter-empty hidden>No conversations match these filters.</p>
+  </div>
+</section>
+{% endblock %}

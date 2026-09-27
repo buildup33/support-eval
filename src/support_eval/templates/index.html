@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}New evaluation · Support Eval{% endblock %}
+{% block page %}home{% endblock %}
+{% block header_action %}<span class="header-note">Local app · Groq evaluation</span>{% endblock %}
+{% block content %}
+<section class="hero" data-ambient-hero>
+  <div class="hero-light" aria-hidden="true"></div>
+  <div class="hero-content">
+    <p class="eyebrow">Conversation quality, made reviewable</p>
+    <h1>Evaluate support conversations against your own standards.</h1>
+    <p class="hero-copy">Upload a conversation export, refine the rubric, and get a traceable QA review powered by Groq—with deterministic scores, flags, and transcript-backed evidence.</p>
+  </div>
+  <div class="hero-proof" aria-label="Product features">
+    <span>CSV + JSON</span><span>Custom rubric</span><span>Verifiable evidence</span>
+  </div>
+</section>
+
+<form class="evaluation-form" action="{{ url_for('create_job') }}" method="post" enctype="multipart/form-data" data-evaluation-form>
+  <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+  <section class="panel setup-panel upload-panel" aria-labelledby="upload-heading">
+    <div class="section-heading">
+      <span class="step-number">1</span>
+      <div><h2 id="upload-heading">Add conversations</h2><p>Upload a CSV or JSON export up to 10 MB.</p></div>
+    </div>
+    <label class="drop-zone" data-drop-zone>
+      <input class="visually-hidden" type="file" name="conversations" accept=".csv,.json,text/csv,application/json" required data-file-input>
+      <span class="upload-icon" aria-hidden="true">↑</span>
+      <strong>Drop your file here</strong>
+      <span>or click to browse</span>
+    </label>
+    <div class="file-card" data-file-card hidden aria-live="polite">
+      <span class="file-type-mark" aria-hidden="true" data-file-type>CSV</span>
+      <div class="file-copy"><strong data-file-name></strong><span data-file-meta></span></div>
+      <div class="file-actions">
+        <button class="text-button" type="button" data-replace-file>Replace</button>
+        <button class="text-button text-button-danger" type="button" data-remove-file>Remove</button>
+      </div>
+    </div>
+    <p class="field-help">Need the format? <a href="{{ url_for('sample_conversations') }}">Download a sample CSV</a>.</p>
+  </section>
+
+  <section class="panel setup-panel" aria-labelledby="rubric-heading">
+    <div class="section-heading">
+      <span class="step-number">2</span>
+      <div><h2 id="rubric-heading">Review your QA rubric</h2><p>Edit the JSON directly. The preview updates as you type.</p></div>
+    </div>
+    <div class="rubric-layout">
+      <div class="editor-pane">
+        <label class="field-label" for="rubric">Rubric JSON</label>
+        <textarea id="rubric" name="rubric" class="code-editor" spellcheck="false" required data-rubric-editor>{{ rubric_json }}</textarea>
+        <p class="editor-status" data-rubric-status aria-live="polite">Valid rubric</p>
+      </div>
+      <div class="preview-pane">
+        <div class="preview-heading"><span>Criteria preview</span><strong data-criteria-count>0 criteria</strong></div>
+        <div class="criterion-preview" data-criterion-preview></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="run-card" aria-labelledby="run-heading">
+    <div>
+      <p class="eyebrow">Ready when you are</p>
+      <h2 id="run-heading">Run the evaluation</h2>
+      <p>Job files stay local. Normalized conversation content, included metadata, and your rubric are sent to Groq for evaluation.</p>
+    </div>
+    <dl class="run-context">
+      <div><dt>Provider</dt><dd>Groq</dd></div>
+      <div><dt>Model</dt><dd>{{ model }}</dd></div>
+      <div><dt>Criteria</dt><dd data-run-criteria>—</dd></div>
+    </dl>
+    <button class="button button-primary button-large run-button" type="submit" data-run-button>
+      <span>Start evaluation</span><span class="button-arrow" aria-hidden="true">→</span>
+    </button>
+  </section>
+</form>
+
+<aside class="beta-notice">
+  <strong>Built for assisted review, not blind automation.</strong>
+  <span>AI judgment is beta. Review flagged conversations and evidence before making consequential decisions.</span>
+</aside>
+{% endblock %}

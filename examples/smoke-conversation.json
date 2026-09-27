@@ -1,0 +1,20 @@
+{
+  "conversations": [
+    {
+      "id": "smoke-test-1",
+      "messages": [
+        {
+          "role": "customer",
+          "content": "Hello, my order arrived with a cracked screen."
+        },
+        {
+          "role": "agent",
+          "content": "Hello, I understand how frustrating that is. I arranged a replacement, so this is resolved. Is there anything else I can help with?"
+        }
+      ],
+      "metadata": {
+        "purpose": "single-request Groq smoke test"
+      }
+    }
+  ]
+}

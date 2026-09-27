@@ -1,0 +1,125 @@
+{
+  "rubric_file": "examples/benchmark-rubric.json",
+  "cases": [
+    {
+      "conversation_id": "bench-01-excellent",
+      "should_be_flagged": false,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The agent specifically acknowledges both the unexpected renewal and the medical-bill impact."},
+        "professionalism": {"expected": "pass", "justification": "The tone is calm, respectful, and clear throughout."},
+        "accuracy": {"expected": "pass", "justification": "The cancellation timing, refund amount, destination, reference, and qualified bank timeline are supported."},
+        "resolution": {"expected": "pass", "justification": "The full refund is issued and confirmed by an emailed receipt, and future renewal is stopped."},
+        "policy_compliance": {"expected": "pass", "justification": "The account is authenticated and the refund goes to the original payment method."},
+        "closing": {"expected": "pass", "justification": "The agent summarizes cancellation status and offers further help."}
+      }
+    },
+    {
+      "conversation_id": "bench-02-no-empathy",
+      "should_be_flagged": true,
+      "criteria": {
+        "empathy": {"expected": "fail", "justification": "The agent never acknowledges the overdraft risk or distress caused by the duplicate charge."},
+        "professionalism": {"expected": "pass", "justification": "Although terse, the agent is factual and not disrespectful or blaming."},
+        "accuracy": {"expected": "pass", "justification": "The duplicate captures, void, reference, and qualified bank timeline are stated consistently."},
+        "resolution": {"expected": "pass", "justification": "The duplicate charge is voided and the customer confirms receiving the notice."},
+        "policy_compliance": {"expected": "pass", "justification": "The account is verified and the money is returned to the original payment method."},
+        "closing": {"expected": "pass", "justification": "The agent offers further help after explaining the outcome."}
+      }
+    },
+    {
+      "conversation_id": "bench-03-unsupported-resolution",
+      "should_be_flagged": true,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The agent acknowledges the repeated crashes and their impact on expense reporting."},
+        "professionalism": {"expected": "pass", "justification": "The wording remains civil and understandable despite the bad diagnosis."},
+        "accuracy": {"expected": "fail", "justification": "A permanent fix is claimed without support, and the customer directly reports that it did not work."},
+        "resolution": {"expected": "fail", "justification": "The app continues to crash and no effective troubleshooting or owned escalation is provided."},
+        "policy_compliance": {"expected": "fail", "justification": "The ticket is marked completed despite explicit evidence that the issue persists."},
+        "closing": {"expected": "fail", "justification": "The agent closes the unresolved case and shifts the burden to opening a new ticket."}
+      }
+    },
+    {
+      "conversation_id": "bench-04-false-claim",
+      "should_be_flagged": true,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The agent recognizes the concern created by delayed medication."},
+        "professionalism": {"expected": "pass", "justification": "The exchange is respectful and gives a comprehensible next step."},
+        "accuracy": {"expected": "fail", "justification": "The absolute weekend-scan claim and guaranteed delivery time are unsupported by the available records."},
+        "resolution": {"expected": "uncertain", "justification": "There is a contingency to open a trace, but shipment and delivery remain unconfirmed."},
+        "policy_compliance": {"expected": "pass", "justification": "No protected information is disclosed, prohibited credential requested, or completed action falsely asserted."},
+        "closing": {"expected": "pass", "justification": "The agent tells the customer when and how to continue if the parcel does not arrive."}
+      }
+    },
+    {
+      "conversation_id": "bench-05-rude-response",
+      "should_be_flagged": true,
+      "criteria": {
+        "empathy": {"expected": "fail", "justification": "The agent gives no acknowledgement of the lockout and instead blames the customer."},
+        "professionalism": {"expected": "fail", "justification": "The phrases 'clearly didn't follow' and 'Obviously' are demeaning and unprofessional."},
+        "accuracy": {"expected": "pass", "justification": "The only operational claim—that a new link was sent—is borne out when it works."},
+        "resolution": {"expected": "pass", "justification": "The customer confirms the new link restored account access."},
+        "policy_compliance": {"expected": "pass", "justification": "No secret is requested and no sensitive disclosure or unsupported completion violates the explicit policy."},
+        "closing": {"expected": "fail", "justification": "The abrupt 'Ticket closed' provides neither a useful summary nor a route for further help."}
+      }
+    },
+    {
+      "conversation_id": "bench-06-unresolved",
+      "should_be_flagged": true,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The agent directly acknowledges the reconciliation deadline risk."},
+        "professionalism": {"expected": "pass", "justification": "The questions and response are polite, relevant, and clear."},
+        "accuracy": {"expected": "pass", "justification": "The agent makes no unsupported diagnosis and appropriately describes engineering review as needed."},
+        "resolution": {"expected": "fail", "justification": "Nothing is fixed and the handoff lacks a ticket reference, owner, timeframe, or follow-up commitment."},
+        "policy_compliance": {"expected": "pass", "justification": "The conversation contains no protected disclosure, forbidden credential request, refund, or false completion claim."},
+        "closing": {"expected": "fail", "justification": "The conversation ends without a concrete next step, service expectation, or way to track escalation."}
+      }
+    },
+    {
+      "conversation_id": "bench-07-poor-closing",
+      "should_be_flagged": true,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The agent explicitly recognizes that the shipment timing matters."},
+        "professionalism": {"expected": "pass", "justification": "The interaction is concise, respectful, and clear."},
+        "accuracy": {"expected": "pass", "justification": "The address update is supported by the order state and the customer's confirmation on refresh."},
+        "resolution": {"expected": "pass", "justification": "The requested address change is completed and independently visible to the customer."},
+        "policy_compliance": {"expected": "pass", "justification": "Identity is verified before the sensitive order change, and completion is evidenced."},
+        "closing": {"expected": "fail", "justification": "The one-word closing gives no summary, shipping implication, or offer of further help."}
+      }
+    },
+    {
+      "conversation_id": "bench-08-ambiguous",
+      "should_be_flagged": true,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The agent recognizes that intermittent data mismatches undermine reporting trust."},
+        "professionalism": {"expected": "pass", "justification": "The reply is transparent, respectful, and gives precise instructions."},
+        "accuracy": {"expected": "uncertain", "justification": "The enabled setting is a plausible explanation, but no rerun confirms that it caused the historical mismatch."},
+        "resolution": {"expected": "uncertain", "justification": "A reasonable diagnostic and escalation path is provided, but the customer has not reported the outcome."},
+        "policy_compliance": {"expected": "pass", "justification": "No explicit authentication, credential, refund, or completion policy is violated."},
+        "closing": {"expected": "pass", "justification": "The agent gives a clear test and explains exactly what to send if it fails."}
+      }
+    },
+    {
+      "conversation_id": "bench-09-policy-violation",
+      "should_be_flagged": true,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The agent acknowledges that the renewal was unexpected."},
+        "professionalism": {"expected": "pass", "justification": "The agent is courteous, direct, and helpful in tone."},
+        "accuracy": {"expected": "pass", "justification": "The customer confirms seeing the issued credit, and the cancellation outcome is stated consistently."},
+        "resolution": {"expected": "pass", "justification": "The plan is cancelled and the customer explicitly accepts the immediately available credit as resolving the request."},
+        "policy_compliance": {"expected": "fail", "justification": "The refund value is issued as account credit rather than returned to the original payment method, contrary to the explicit rubric."},
+        "closing": {"expected": "pass", "justification": "The agent summarizes both outcomes and provides a route for further help."}
+      }
+    },
+    {
+      "conversation_id": "bench-10-multiple-failures",
+      "should_be_flagged": true,
+      "criteria": {
+        "empathy": {"expected": "fail", "justification": "The agent blames the customer and never acknowledges the account takeover risk."},
+        "professionalism": {"expected": "fail", "justification": "The responses are accusatory, dismissive, and explicitly tell the customer not to seek help."},
+        "accuracy": {"expected": "fail", "justification": "Country location does not prove account security, and the claimed restoration and refund conflict with the customer's evidence."},
+        "resolution": {"expected": "fail", "justification": "Access remains blocked and the fraudulent order is still preparing to ship."},
+        "policy_compliance": {"expected": "fail", "justification": "The agent requests a password, one-time code, and full card number and asserts unsupported completed actions."},
+        "closing": {"expected": "fail", "justification": "The closing is hostile and supplies no safe next step for an active security incident."}
+      }
+    }
+  ]
+}

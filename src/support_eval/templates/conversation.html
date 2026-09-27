@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}{{ result.conversation_id }} · Support Eval{% endblock %}
+{% block page %}conversation{% endblock %}
+{% block content %}
+{% set failed = result.evaluations|selectattr('status', 'equalto', 'fail')|list %}
+{% set uncertain = result.evaluations|selectattr('status', 'equalto', 'uncertain')|list %}
+{% set passed = result.evaluations|selectattr('status', 'equalto', 'pass')|list %}
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('job_results', job_id=job.id) }}">← Back to results</a><span>/</span><span>{{ result.conversation_id }}</span></nav>
+<section class="detail-heading">
+  <div><p class="eyebrow">Conversation review</p><h1>{{ result.conversation_id }}</h1><p class="review-summary"><strong>{{ failed|length }} failed</strong><span>{{ uncertain|length }} uncertain</span><span>{{ passed|length }} passed</span></p><p class="review-flags">{{ 'Flagged for review by deterministic rules' if result.flagged else 'No deterministic flags' }}</p></div>
+  <div class="detail-score"><strong>{{ '%.0f'|format(result.score) }}</strong><span>Score</span><span class="status-pill {{ 'pill-flagged' if result.flagged else 'pill-passed' }}">{{ 'Flagged' if result.flagged else 'Passed' }}</span></div>
+</section>
+
+<div class="detail-grid">
+  <section class="panel transcript-panel" aria-labelledby="transcript-heading" data-transcript-panel>
+    <div class="sticky-section-title"><h2 id="transcript-heading">Transcript</h2><span>Evidence links jump here</span></div>
+    <div class="transcript">
+      {% for message in messages %}
+      <article class="message message-{{ message.role }}" id="message-{{ message.message_id }}" tabindex="-1">
+        <div class="message-meta"><strong>{{ message.role|title }}</strong><span>{{ message.message_id }}{% if message.timestamp %} · {{ message.timestamp }}{% endif %}</span></div>
+        <p>{{ message.content }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="judgment-column" aria-labelledby="judgment-heading">
+    <div class="sticky-section-title"><h2 id="judgment-heading">Criterion judgments</h2><span>AI evaluation · beta</span></div>
+    {% for status in ['fail', 'uncertain', 'pass'] %}
+    {% for evaluation in result.evaluations if evaluation.status == status %}
+      {% set criterion = criterion_by_id[evaluation.criterion_id] %}
+      <article class="judgment-card judgment-{{ evaluation.status }}">
+        <header><div><span class="status-pill pill-{{ evaluation.status }}">{{ evaluation.status|title }}</span><h3>{{ criterion.name }}</h3></div></header>
+        <p>{{ evaluation.rationale }}</p>
+        <div class="criterion-meta"><span>Weight {{ criterion.weight|round(1) }}</span><span>{{ criterion.description }}</span></div>
+        <div class="evidence-block">
+          <strong>Transcript evidence</strong>
+          {% if evaluation.evidence %}
+            {% for evidence in evaluation.evidence %}
+            <button type="button" class="evidence-link" data-evidence-target="message-{{ evidence.message_id }}" aria-controls="message-{{ evidence.message_id }}" aria-label="Show evidence in {{ evidence.message_id }}, {{ evidence.role }} message">
+              <span>{{ evidence.message_id }} · {{ evidence.role|title }}</span><span aria-hidden="true">↗</span>
+            </button>
+            {% endfor %}
+          {% else %}<span class="no-evidence">No transcript evidence referenced.</span>{% endif %}
+        </div>
+      </article>
+    {% endfor %}
+    {% endfor %}
+  </section>
+</div>
+{% endblock %}

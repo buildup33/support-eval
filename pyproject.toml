@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "support-eval"
+version = "0.1.0"
+description = "Open-source support QA with custom rubrics and transcript-backed evidence"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Support Eval contributors" }]
+keywords = [
+    "customer-support",
+    "quality-assurance",
+    "conversation-analysis",
+    "llm",
+    "groq",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Framework :: Flask",
+    "Intended Audience :: Customer Service",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+dependencies = [
+    "Flask>=3.1,<4",
+    "pydantic>=2.6,<3",
+    "typer>=0.12,<1",
+]
+
+[project.urls]
+Homepage = "https://github.com/buildup33/support-eval"
+Repository = "https://github.com/buildup33/support-eval"
+Issues = "https://github.com/buildup33/support-eval/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8,<9",
+    "ruff>=0.8,<1",
+]
+
+[project.scripts]
+support-eval = "support_eval.cli:app"
+support-eval-web = "support_eval.web:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+support_eval = ["templates/*.html", "static/*.css", "static/*.js"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

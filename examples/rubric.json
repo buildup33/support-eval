@@ -1,0 +1,42 @@
+{
+  "name": "Core support quality rubric",
+  "flag_threshold": 70,
+  "criteria": [
+    {
+      "id": "greeting",
+      "name": "Professional greeting",
+      "description": "The conversation includes a friendly greeting.",
+      "weight": 1,
+      "pass_threshold": 0.5,
+      "keywords": ["hello"],
+      "flag_on_fail": false
+    },
+    {
+      "id": "empathy",
+      "name": "Empathy",
+      "description": "The agent acknowledges the customer's experience.",
+      "weight": 2,
+      "pass_threshold": 0.5,
+      "keywords": ["understand"],
+      "flag_on_fail": true
+    },
+    {
+      "id": "resolution",
+      "name": "Clear resolution",
+      "description": "The conversation contains evidence of a concrete resolution.",
+      "weight": 3,
+      "pass_threshold": 1,
+      "keywords": ["resolved"],
+      "flag_on_fail": true
+    },
+    {
+      "id": "closing",
+      "name": "Helpful closing",
+      "description": "The agent offers further help before closing.",
+      "weight": 1,
+      "pass_threshold": 0.5,
+      "keywords": ["anything else"],
+      "flag_on_fail": false
+    }
+  ]
+}

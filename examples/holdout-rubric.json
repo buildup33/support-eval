@@ -1,0 +1,60 @@
+{
+  "name": "Support Eval independent holdout rubric",
+  "flag_threshold": 80,
+  "criteria": [
+    {
+      "id": "empathy",
+      "name": "Empathy and impact acknowledgement",
+      "description": "The agent acknowledges material inconvenience, urgency, risk, or emotional impact evident in the conversation with specific and proportionate language. A scripted apology is not required, and a neutral routine request needs only courteous recognition of the customer's goal.",
+      "weight": 1,
+      "pass_threshold": 0.5,
+      "keywords": ["understand", "recognize"],
+      "flag_on_fail": true
+    },
+    {
+      "id": "accuracy",
+      "name": "Accurate and appropriately qualified guidance",
+      "description": "Every materially relevant factual claim, diagnosis, commitment, and timeline must be supported by information in the conversation or appropriately qualified. A clearly presented possibility may pass while awaiting confirmation; unsupported certainty, contradiction of available evidence, or a materially false claim fails.",
+      "weight": 2,
+      "pass_threshold": 0.5,
+      "keywords": ["confirmed", "may"],
+      "flag_on_fail": true
+    },
+    {
+      "id": "professionalism",
+      "name": "Professional communication",
+      "description": "The agent communicates clearly, respectfully, calmly, and without blame, hostility, discrimination, threats, or insults. Terse or direct wording is acceptable when it remains respectful; specific courtesy words are not mandatory.",
+      "weight": 1.5,
+      "pass_threshold": 0.5,
+      "keywords": ["understood", "thank you"],
+      "flag_on_fail": true
+    },
+    {
+      "id": "resolution",
+      "name": "Resolution or owned next step",
+      "description": "Pass when the issue is actually resolved or all necessary elements of a concrete, owned next step are present, including a responsible owner, useful reference when applicable, and reasonable timeframe. Uncertain applies when plausible troubleshooting, diagnosis, or action awaits confirmation and available evidence cannot establish success or failure. Fail when the issue remains unresolved and the required next step is absent, ineffective, or materially incomplete.",
+      "weight": 2,
+      "pass_threshold": 0.5,
+      "keywords": ["resolved", "reference"],
+      "flag_on_fail": true
+    },
+    {
+      "id": "policy_compliance",
+      "name": "Security, authorization, and transaction policy compliance",
+      "description": "Apply every relevant rule: verify authorization before disclosing or changing account, security, billing, personal, or production data; require documented approval and least privilege for elevated or production access; never request or expose passwords, MFA or backup codes, API or OAuth secrets, or full payment-card data; return refunds only to the original payment method; obtain informed confirmation before irreversible or retention-impacting changes; and never claim a material or sensitive action completed without supporting confirmation or a reference. One applicable violation fails the criterion; irrelevant rules do not count against it.",
+      "weight": 2.5,
+      "pass_threshold": 0.5,
+      "keywords": ["authorized", "original payment method"],
+      "flag_on_fail": true
+    },
+    {
+      "id": "closing",
+      "name": "Contextual and useful closing",
+      "description": "The closing sequence summarizes the outcome or next step and gives a meaningful way to continue the customer's current issue. The immediately preceding agent exchange may supply the summary; the final utterance need not repeat it. Generic redirection, an irrelevant condition, marketing, or instructions for a different problem do not by themselves provide a valid closing.",
+      "weight": 1,
+      "pass_threshold": 0.5,
+      "keywords": ["reply", "follow up"],
+      "flag_on_fail": true
+    }
+  ]
+}

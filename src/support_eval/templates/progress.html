@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Evaluation progress · Support Eval{% endblock %}
+{% block page %}progress{% endblock %}
+{% block content %}
+<section class="progress-layout" data-job-status-url="{{ url_for('job_status', job_id=job.id) }}">
+  <div class="progress-visual" aria-hidden="true">
+    <div class="analysis-orb">
+      <span class="analysis-ring"></span>
+      <span class="analysis-scan"></span>
+      <div><strong data-progress-percent>{{ ((completed / job.total) * 100)|round|int }}%</strong><small>analyzed</small></div>
+    </div>
+  </div>
+  <div class="progress-content">
+    <p class="eyebrow">{{ 'Evaluation stopped' if job.state == 'failed' else 'Evaluation in progress' }}</p>
+    <h1>Reviewing {{ job.total }} conversation{% if job.total != 1 %}s{% endif %}</h1>
+    <p class="progress-message" data-status-message aria-live="polite">{{ job.status_message }}</p>
+    <div class="progress-track" role="progressbar" aria-label="Evaluation progress" aria-valuemin="0" aria-valuemax="{{ job.total }}" aria-valuenow="{{ completed }}" data-progress-bar>
+      <span style="width: {{ (completed / job.total) * 100 }}%" data-progress-fill><i></i></span>
+    </div>
+    <div class="progress-meta"><strong data-progress-count>{{ completed }} of {{ job.total }}</strong><span>validated and scored</span></div>
+    <div class="job-file"><span class="file-dot"></span><div><strong>{{ job.display_filename }}</strong><span>Progress is checkpointed after each conversation.</span></div></div>
+    <div class="failure-card" data-failure-card {% if job.state != 'failed' %}hidden{% endif %}>
+      <strong>Evaluation stopped</strong>
+      <p data-error-message>{{ job.error_message or '' }}</p>
+      <form method="post" action="{{ url_for('resume_job', job_id=job.id) }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+        <button class="button button-primary" type="submit">Resume from checkpoint</button>
+      </form>
+    </div>
+    <p class="quiet-note">You can leave this page and return to its URL. Completed work remains in the local job folder.</p>
+  </div>
+</section>
+{% endblock %}

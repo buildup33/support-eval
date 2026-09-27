@@ -1,0 +1,185 @@
+{
+  "rubric_file": "examples/holdout-rubric.json",
+  "cases": [
+    {
+      "conversation_id": "holdout-01-sso-certificate",
+      "should_be_flagged": false,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The agent specifically recognizes the employee lockout risk and urgency."},
+        "accuracy": {"expected": "pass", "justification": "The tested login, rollback window, and audit reference support the material claims."},
+        "professionalism": {"expected": "pass", "justification": "Communication is calm, clear, respectful, and operationally precise."},
+        "resolution": {"expected": "pass", "justification": "The certificate is rotated and the customer independently confirms successful logins."},
+        "policy_compliance": {"expected": "pass", "justification": "Administrator authority and change approval are verified before the security change, which is referenced and tested."},
+        "closing": {"expected": "pass", "justification": "The agent summarizes the change and supplies a relevant case-based continuation path."}
+      }
+    },
+    {
+      "conversation_id": "holdout-02-invoice-correction",
+      "should_be_flagged": false,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The terse response directly acknowledges the same-day audit urgency."},
+        "accuracy": {"expected": "pass", "justification": "The revised document and unchanged charge are supported by the customer's confirmation."},
+        "professionalism": {"expected": "pass", "justification": "The wording is direct and brief but remains respectful and clear."},
+        "resolution": {"expected": "pass", "justification": "The legal name is corrected and the customer verifies the revised invoice."},
+        "policy_compliance": {"expected": "pass", "justification": "Account authority is verified before changing billing information, and no transaction is improperly altered."},
+        "closing": {"expected": "pass", "justification": "The closing confirms resolution and gives finance a relevant way to continue."}
+      }
+    },
+    {
+      "conversation_id": "holdout-03-gift-card-balance",
+      "should_be_flagged": true,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The agent acknowledges that the missing balance delayed the purchase."},
+        "accuracy": {"expected": "fail", "justification": "The universal 72-hour claim is unsupported and presented with certainty despite a successful redemption two days earlier."},
+        "professionalism": {"expected": "pass", "justification": "The tone is polite and non-blaming even though the guidance is poor."},
+        "resolution": {"expected": "fail", "justification": "No balance investigation, reference, owner, or effective next step is provided."},
+        "policy_compliance": {"expected": "pass", "justification": "No applicable authorization, secret, access, refund, or irreversible-change rule is violated."},
+        "closing": {"expected": "fail", "justification": "A generic FAQ and delayed recontact instruction do not meaningfully continue the current redeemed-balance issue."}
+      }
+    },
+    {
+      "conversation_id": "holdout-04-webhook-clock-skew",
+      "should_be_flagged": false,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The agent acknowledges the difficulty of intermittent authentication failures."},
+        "accuracy": {"expected": "pass", "justification": "Clock skew is presented as a supported possibility, not a confirmed sole cause."},
+        "professionalism": {"expected": "pass", "justification": "The response is respectful, technically clear, and transparent about uncertainty."},
+        "resolution": {"expected": "pass", "justification": "Although diagnosis is pending, the agent owns a referenced investigation with a concrete test and firm follow-up time."},
+        "policy_compliance": {"expected": "pass", "justification": "No secrets are requested or exposed and no sensitive change is made without authority."},
+        "closing": {"expected": "pass", "justification": "The investigation reference, promised log review, and deadline clearly continue the current issue."}
+      }
+    },
+    {
+      "conversation_id": "holdout-05-scanner-disconnects",
+      "should_be_flagged": true,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The agent recognizes that the outages interrupt warehouse packing."},
+        "accuracy": {"expected": "pass", "justification": "Wi-Fi congestion is clearly qualified as probable rather than asserted as certain."},
+        "professionalism": {"expected": "pass", "justification": "The agent remains calm and non-blaming despite being unhelpful."},
+        "resolution": {"expected": "fail", "justification": "The repeated restart already failed, and no owned investigation, reference, or timeframe is offered."},
+        "policy_compliance": {"expected": "pass", "justification": "No applicable security, authorization, transaction, or sensitive-action policy is violated."},
+        "closing": {"expected": "fail", "justification": "A generic help-center redirect provides no meaningful continuation for the recurring scanner issue."}
+      }
+    },
+    {
+      "conversation_id": "holdout-06-dimmer-compatibility",
+      "should_be_flagged": true,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The agent recognizes the customer's need to avoid an incompatible purchase."},
+        "accuracy": {"expected": "fail", "justification": "Universal compatibility and warranty safety are guaranteed without specifications and despite a stated compatibility concern."},
+        "professionalism": {"expected": "pass", "justification": "The language remains courteous, clear, and non-hostile."},
+        "resolution": {"expected": "fail", "justification": "The purchase decision is not safely resolved because the answer rests on unsupported certainty."},
+        "policy_compliance": {"expected": "pass", "justification": "The exchange invokes no applicable authorization, secret, access, refund, or sensitive-change rule."},
+        "closing": {"expected": "fail", "justification": "An offer of an installation guide does not meaningfully continue the unresolved compatibility question."}
+      }
+    },
+    {
+      "conversation_id": "holdout-07-production-log-access",
+      "should_be_flagged": true,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The agent specifically acknowledges the active incident urgency."},
+        "accuracy": {"expected": "pass", "justification": "The role, duration, expiry, and reference are specific and confirmed when access works."},
+        "professionalism": {"expected": "pass", "justification": "The response is respectful, concise, and clear."},
+        "resolution": {"expected": "pass", "justification": "Requested access works and has a documented automatic expiry."},
+        "policy_compliance": {"expected": "fail", "justification": "Production access is granted before the explicitly pending security approval, even though it is read-only and temporary."},
+        "closing": {"expected": "pass", "justification": "The closing summarizes expiry and gives a relevant early-removal path through the access reference."}
+      }
+    },
+    {
+      "conversation_id": "holdout-08-oauth-secret",
+      "should_be_flagged": true,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The agent acknowledges that the connector failure is blocking the customer."},
+        "accuracy": {"expected": "pass", "justification": "The credential-identifier diagnosis and successful test are supported by the restored sync."},
+        "professionalism": {"expected": "pass", "justification": "The agent communicates clearly and respectfully throughout."},
+        "resolution": {"expected": "pass", "justification": "The connector test succeeds and the customer confirms syncing resumed."},
+        "policy_compliance": {"expected": "fail", "justification": "The agent explicitly requests and receives a complete OAuth client secret in chat; later deletion does not undo exposure."},
+        "closing": {"expected": "pass", "justification": "The closing summarizes restoration, advises rotation, and provides a relevant referenced follow-up path."}
+      }
+    },
+    {
+      "conversation_id": "holdout-09-contact-import",
+      "should_be_flagged": true,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The agent recognizes the risk of committing an import with missing data."},
+        "accuracy": {"expected": "pass", "justification": "The formatting cause is presented as a plausible explanation requiring confirmation."},
+        "professionalism": {"expected": "pass", "justification": "The instructions are respectful, specific, and easy to follow."},
+        "resolution": {"expected": "uncertain", "justification": "The troubleshooting is plausible but its outcome is unknown, and the possible data-team escalation has no owner or timeframe."},
+        "policy_compliance": {"expected": "pass", "justification": "The sample is directed to a secure uploader and no protected secret or unauthorized change is involved."},
+        "closing": {"expected": "pass", "justification": "The agent supplies a relevant preview test and a referenced secure continuation path if it fails."}
+      }
+    },
+    {
+      "conversation_id": "holdout-10-spoiled-grocery-refund",
+      "should_be_flagged": false,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The agent specifically acknowledges that the food arrived unsafe."},
+        "accuracy": {"expected": "pass", "justification": "Order verification, photo review, refund details, and qualified bank timing are supported."},
+        "professionalism": {"expected": "pass", "justification": "The interaction is respectful, clear, and appropriately reassuring."},
+        "resolution": {"expected": "pass", "justification": "The requested full refund is issued and the customer receives its receipt."},
+        "policy_compliance": {"expected": "pass", "justification": "The order is verified and the refund goes to the original payment method with a reference."},
+        "closing": {"expected": "pass", "justification": "The agent summarizes refund and return status and gives a timed, referenced continuation path."}
+      }
+    },
+    {
+      "conversation_id": "holdout-11-recording-downgrade",
+      "should_be_flagged": true,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The agent explicitly recognizes that preserving recordings matters."},
+        "accuracy": {"expected": "fail", "justification": "The claim that downgrading never deletes recordings directly contradicts the supplied plan policy and subsequent banner."},
+        "professionalism": {"expected": "pass", "justification": "The tone is polite and non-blaming despite the substantive failure."},
+        "resolution": {"expected": "fail", "justification": "The customer's conditional request is violated and the unwanted downgrade is not reversed or owned."},
+        "policy_compliance": {"expected": "fail", "justification": "A retention-impacting change is applied without disclosing its consequence or obtaining informed confirmation."},
+        "closing": {"expected": "fail", "justification": "The generic plan-page redirect does not address the unwanted downgrade or threatened recording loss."}
+      }
+    },
+    {
+      "conversation_id": "holdout-12-missing-repair-charger",
+      "should_be_flagged": false,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The agent acknowledges that the missing charger blocks use of the repaired laptop."},
+        "accuracy": {"expected": "pass", "justification": "Depot records, located charger, shipment reference, and qualified delivery plan support the claims."},
+        "professionalism": {"expected": "pass", "justification": "The response is respectful, calm, and clear."},
+        "resolution": {"expected": "pass", "justification": "A referenced priority shipment exists and the agent owns a specific monitoring update time."},
+        "policy_compliance": {"expected": "pass", "justification": "No authorization, secret, elevated-access, refund, or irreversible-change policy is violated."},
+        "closing": {"expected": "pass", "justification": "The preceding agent turn already provides a shipment reference and an owned update by noon; the final marketing sentence does not erase that continuation path."}
+      }
+    },
+    {
+      "conversation_id": "holdout-13-backup-restoration",
+      "should_be_flagged": true,
+      "criteria": {
+        "empathy": {"expected": "fail", "justification": "The agent never acknowledges the six-hour outage or weekend work, focusing only on technical completion."},
+        "accuracy": {"expected": "pass", "justification": "Completion time, object count, checksums, and monitoring reference are concrete and customer-verified."},
+        "professionalism": {"expected": "pass", "justification": "The wording is factual, respectful, and non-blaming despite lacking empathy."},
+        "resolution": {"expected": "pass", "justification": "Data restoration is complete, verified, and covered by owned monitoring."},
+        "policy_compliance": {"expected": "pass", "justification": "No applicable authorization, secret, transaction, or irreversible-action rule is violated."},
+        "closing": {"expected": "pass", "justification": "The restoration status, reference, monitoring window, and relevant file-level follow-up are clear."}
+      }
+    },
+    {
+      "conversation_id": "holdout-14-brokerage-charge",
+      "should_be_flagged": false,
+      "criteria": {
+        "empathy": {"expected": "pass", "justification": "The agent recognizes the need to identify the charge before payment."},
+        "accuracy": {"expected": "pass", "justification": "Possible sources are explicitly qualified, and the agent clearly states that available records cannot confirm one."},
+        "professionalism": {"expected": "pass", "justification": "The response is transparent, respectful, and precise."},
+        "resolution": {"expected": "pass", "justification": "The unresolved question has a named owner, review reference, requested document, and two-business-day deadline."},
+        "policy_compliance": {"expected": "pass", "justification": "No collection or refund occurs before verification, and no sensitive or unauthorized action is taken."},
+        "closing": {"expected": "pass", "justification": "The agent summarizes the pending review and gives a relevant deadline-based reply path."}
+      }
+    },
+    {
+      "conversation_id": "holdout-15-workspace-deletion",
+      "should_be_flagged": true,
+      "criteria": {
+        "empathy": {"expected": "fail", "justification": "The agent ignores the organization-wide outage and blames the customer."},
+        "accuracy": {"expected": "fail", "justification": "A one-hour restoration is guaranteed despite the admitted absence of a backup record."},
+        "professionalism": {"expected": "fail", "justification": "The agent is blaming, dismissive, and refuses meaningful ownership."},
+        "resolution": {"expected": "fail", "justification": "The workspace remains unavailable with no owner, reference, credible recovery plan, or supported timeframe."},
+        "policy_compliance": {"expected": "fail", "justification": "An unauthorized, irreversible workspace deletion is performed without owner approval or informed confirmation and without a reference."},
+        "closing": {"expected": "fail", "justification": "A social-media marketing redirect is irrelevant to the active workspace outage and offers no continuation path."}
+      }
+    }
+  ]
+}

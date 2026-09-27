@@ -1,0 +1,60 @@
+{
+  "name": "Support Eval human benchmark rubric",
+  "flag_threshold": 80,
+  "criteria": [
+    {
+      "id": "empathy",
+      "name": "Empathy and acknowledgement",
+      "description": "The agent acknowledges the customer's situation or impact with specific, sincere language. Generic politeness alone is not enough.",
+      "weight": 1.5,
+      "pass_threshold": 0.5,
+      "keywords": ["understand", "sorry"],
+      "flag_on_fail": true
+    },
+    {
+      "id": "professionalism",
+      "name": "Professional communication",
+      "description": "The agent remains respectful, clear, calm, and non-blaming throughout the interaction.",
+      "weight": 1.5,
+      "pass_threshold": 0.5,
+      "keywords": ["please", "thank you"],
+      "flag_on_fail": true
+    },
+    {
+      "id": "accuracy",
+      "name": "Accurate and supported guidance",
+      "description": "Factual claims, diagnoses, commitments, and timelines are supported by the conversation or appropriately qualified. Unsupported certainty fails; genuinely indeterminate claims may be uncertain.",
+      "weight": 2,
+      "pass_threshold": 0.5,
+      "keywords": ["confirmed", "according to"],
+      "flag_on_fail": true
+    },
+    {
+      "id": "resolution",
+      "name": "Effective resolution",
+      "description": "The customer's stated issue is actually resolved, or the agent provides a concrete, owned next step with a reference and reasonable timeframe. A suggestion awaiting confirmation may be uncertain.",
+      "weight": 2,
+      "pass_threshold": 0.5,
+      "keywords": ["resolved", "completed"],
+      "flag_on_fail": true
+    },
+    {
+      "id": "policy_compliance",
+      "name": "Policy and security compliance",
+      "description": "The agent must authenticate before disclosing account, order, billing, or security details or making sensitive changes; never request a password, one-time code, or full payment-card number; send refunds only to the original payment method; and never state that an action was completed without evidence that it was performed or confirmed.",
+      "weight": 2,
+      "pass_threshold": 0.5,
+      "keywords": ["verified", "original payment method"],
+      "flag_on_fail": true
+    },
+    {
+      "id": "closing",
+      "name": "Clear and helpful closing",
+      "description": "The agent summarizes the outcome or next step and leaves the customer with a clear way to continue or obtain further help.",
+      "weight": 1,
+      "pass_threshold": 0.5,
+      "keywords": ["anything else", "reply here"],
+      "flag_on_fail": true
+    }
+  ]
+}
